@@ -30,7 +30,8 @@ document.querySelector('.open-envelope').addEventListener('click', event => {
   envelope.classList.add('is-open');
   cover.classList.add('unsealing');
   document.querySelector('.envelope-prompt').textContent = 'Your next adventure is unfolding…';
-  music.startAfter(1000);
+  const openingDelay = reducedMotion.matches ? 1000 : 2000;
+  music.startAfter(openingDelay);
   setTimeout(() => {
     document.body.classList.add('entered');
     main.inert = false;
@@ -38,8 +39,8 @@ document.querySelector('.open-envelope').addEventListener('click', event => {
     cover.inert = true;
     main.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
-    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1200);
-  }, 1000);
+    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1400);
+  }, openingDelay);
 });
 const observer = new IntersectionObserver(entries => {
   for (const entry of entries) if (entry.isIntersecting) {

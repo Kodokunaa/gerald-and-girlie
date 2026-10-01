@@ -1,11 +1,11 @@
 /* Keep the invitation in its envelope while the surrounding text makes room. */
 .invitation-cover{overflow:clip}
-.cover-title,.cover-eyebrow,.envelope-prompt,.cover-date{transition:transform .75s cubic-bezier(.22,1,.36,1)}
+.cover-title,.cover-eyebrow,.envelope-prompt,.cover-date{transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
 .invitation-cover.unsealing .cover-title,.invitation-cover.unsealing .cover-eyebrow{transform:translateY(-55px)}
 .invitation-cover.unsealing .envelope-prompt,.invitation-cover.unsealing .cover-date{transform:translateY(25px)}
-.envelope-flap{transition:transform .55s cubic-bezier(.4,0,.2,1),z-index 0s .28s}
-.envelope .letter{transition:transform .65s cubic-bezier(.22,1,.36,1) .2s}
+.envelope-flap{transition:transform 1.05s cubic-bezier(.4,0,.2,1),z-index 0s .53s}
+.envelope .letter{transition:transform .95s cubic-bezier(.22,1,.36,1) .45s}
 .envelope.is-open .letter{transform:translateY(-60%)}
-.invitation-cover.departing{transform:scale(1.04);transition:opacity 1.2s ease,transform 1.2s ease}
+.invitation-cover.departing{transform:scale(1.04);transition:opacity 1.4s ease,transform 1.4s ease}
 .invitation-cover.departing .letter{transform:translateY(-60%);opacity:1;z-index:1}
 @media(max-width:760px){.invitation-cover.unsealing .cover-title,.invitation-cover.unsealing .cover-eyebrow{transform:translateY(-40px)}.invitation-cover.unsealing .envelope-prompt,.invitation-cover.unsealing .cover-date{transform:translateY(18px)}}

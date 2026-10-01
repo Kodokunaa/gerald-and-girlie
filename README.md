@@ -6,7 +6,7 @@ Run `npm install`, then `npm run dev`. Production: `npm run build`.
 
 ## Remaining supplied details
 
-- The supplied **“Been So Good” piano cover by James Wong** is included in `public/audio/been-so-good-keyboard-v2.mp3`. It starts one second after the envelope is clicked, loops at 100% volume, and can be paused or resumed with the music pill. The slider controls volume; failed downloads can be retried.
+- The supplied **“Been So Good” piano cover by James Wong** is included in `public/audio/been-so-good-keyboard-v2.mp3`. It starts with the main-page transition two seconds after the envelope is clicked (one second with reduced motion), loops at 100% volume, and can be paused or resumed with the music pill. The slider controls volume; failed downloads can be retried.
 - Three additional groomsmen are pending. Add their names to the groomsmen list in `index.html` when supplied.
 - Attire references are labeled for the entourage; the guest dress code has not been confirmed.
 - The closing invitation displays one reserved seat. No RSVP endpoint or deadline was provided, so the page does not collect or pretend to submit responses.

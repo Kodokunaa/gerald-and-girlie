@@ -1,0 +1,8 @@
+.sound-control{padding:8px 14px;gap:12px;max-width:calc(100vw - 30px)}
+.music-toggle{display:inline-flex;align-items:center;gap:10px;min-height:28px;border:0;background:transparent;padding:0;font:inherit;letter-spacing:inherit;white-space:nowrap}
+.volume-control{display:flex;align-items:center;gap:8px;border-left:1px solid #b79f8666;padding-left:12px;color:var(--ink)}
+#music-volume{width:70px;min-width:0;height:28px;margin:0;accent-color:var(--rust);cursor:pointer}
+#music-volume:disabled{cursor:default;opacity:.5}
+#music-volume:focus-visible{outline:2px solid var(--rust);outline-offset:3px;border-radius:8px}
+#volume-value{min-width:26px;font-size:9px;letter-spacing:0;font-variant-numeric:tabular-nums;text-align:right}
+@media(max-width:760px){.sound-control{padding:7px 12px;gap:10px}.volume-control{padding-left:10px;gap:6px}#music-volume{width:60px}.music-toggle{gap:8px}}

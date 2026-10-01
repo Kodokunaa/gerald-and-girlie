@@ -1,0 +1,43 @@
+/* Use individual scale/translate so the existing reveal transforms stay intact. */
+:is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry){transition:scale .22s cubic-bezier(.22,1,.36,1),translate .3s cubic-bezier(.22,1,.36,1),background .25s,color .25s,box-shadow .3s}
+:is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry):active:not(:disabled){scale:.94}
+:is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry):focus-visible{translate:0 -2px;box-shadow:0 5px 18px #57362c20}
+:is(#begin-adventure,.light-button,.text-button) > span{display:inline-block;transition:translate .3s cubic-bezier(.22,1,.36,1)}
+.note summary{transition:color .25s}
+.note summary:active{color:var(--rust)}
+.note summary:focus-visible{color:var(--rust)}
+.note summary i{transition:transform .4s cubic-bezier(.34,1.56,.64,1),color .25s}
+.photo-card.reveal{transition:opacity 1.1s,transform 1.3s cubic-bezier(.22,1,.36,1),scale .25s,box-shadow .4s}
+.memory-photo.reveal{transition:opacity 1.1s,transform 1.3s cubic-bezier(.22,1,.36,1),rotate .4s,scale .25s,box-shadow .4s}
+:is(.photo-card,.memory-photo):active{scale:.97}
+:is(.photo-card,.memory-photo):focus-visible{scale:1.02;box-shadow:0 20px 50px #57362c35}
+.scroll-cue{transition:translate .3s,color .3s}
+.scroll-cue>span:last-child{display:inline-block;transition:translate .3s}
+.scroll-cue:active{translate:0 3px}
+.scroll-top-control svg{transition:translate .3s}
+.volume-control{transition:color .3s}
+.volume-control:focus-within{color:var(--rust)}
+#music-volume{transition:filter .25s}
+#music-volume:active{filter:drop-shadow(0 0 4px #b88a5a66)}
+#volume-value{transition:color .25s}
+.volume-control:focus-within #volume-value{color:var(--rust)}
+dialog[open]{animation:photo-opens .4s cubic-bezier(.22,1,.36,1)}
+dialog[open]::backdrop{animation:backdrop-opens .35s ease-out}
+@keyframes photo-opens{from{opacity:0;scale:.92;translate:0 20px}to{opacity:1;scale:1;translate:0 0}}
+@keyframes backdrop-opens{from{opacity:0}to{opacity:1}}
+@media(hover:hover) and (pointer:fine){
+  :is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.loader-retry):hover:not(:disabled){translate:0 -3px}
+  :is(#begin-adventure,.light-button):hover:not(:disabled){box-shadow:0 8px 24px #57362c25}
+  :is(#begin-adventure,.light-button):hover>span{translate:3px -3px}
+  .text-button:hover>span{translate:0 -2px}
+  :is(.palette-links button,.back-start,.music-toggle):hover{color:var(--rust)}
+  .note summary:hover{color:var(--rust)}
+  .scroll-cue:hover>span:last-child{translate:0 5px}
+  .scroll-top-control:hover svg{translate:0 -3px}
+  #close-photo:hover{scale:1.08;background:#faf6ed}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+  :is(button,a,summary):active,:is(button,a,summary):focus-visible,:is(button,a,summary):hover{scale:1;translate:none}
+  :is(#begin-adventure,.light-button,.text-button,.scroll-cue)>span,.scroll-top-control svg{translate:none!important}
+}

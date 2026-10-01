@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" class="app-loading">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#eee8da" />
+  <meta name="description" content="An invitation to our next adventure. Celebrate Gerald & Girlie on December 18, 2026 at 3 PM, ICCM, Antipolo City, Rizal." />
+  <title>Gerald & Girlie · Our next adventure</title>
+  <style>
+    html,body{margin:0;background:#eee8da}
+    .app-loading body{overflow:hidden}
+    .app-loading body>:not(.page-loader):not(noscript){visibility:hidden!important}
+    .page-loader{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#eee8da;color:#57362c;text-align:center;transition:opacity .45s;gap:22px;padding:24px}
+    .page-loader[hidden]{display:none}.page-loader.is-leaving{opacity:0;pointer-events:none}
+    .loader-monogram{font-family:Georgia,serif;font-size:34px;font-weight:400}.loader-monogram em{color:#94451f;font-size:23px}
+    .loader-message{font:10px/1.8 Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin:0}
+    .loader-line{width:100px;height:1px;background:#b79f8640;overflow:hidden}.loader-line:after{content:'';display:block;height:100%;width:45%;background:#94451f;animation:loading-invitation 1.4s ease-in-out infinite}
+    .loader-retry{padding:12px 20px;border:1px solid #b79f86;background:transparent;color:#57362c;font:12px Arial,sans-serif;cursor:pointer}.loader-retry[hidden]{display:none}
+    @keyframes loading-invitation{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
+    @media(prefers-reduced-motion:reduce){.loader-line:after{animation:none;width:100%}.page-loader{transition:none}}
+  </style>
+  <link rel="preload" href="/fonts/garamond.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/src/style.css" data-invitation-style />
+  <link rel="stylesheet" href="/src/invitation-opening.css" data-invitation-style />
+  <link rel="stylesheet" href="/src/music-controls.css" data-invitation-style />
+  <link rel="stylesheet" href="/src/interactions.css" data-invitation-style />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <script>
+    window.invitationLoadingTimeout=setTimeout(function(){
+      var message=document.querySelector('.loader-message');
+      var retry=document.querySelector('.loader-retry');
+      if(document.documentElement.classList.contains('app-loading')){
+        if(message)message.textContent='Your invitation is taking a little longer.';
+        if(retry)retry.hidden=false;
+      }
+    },15000);
+  </script>
+</head>
+<body>
+  <div class="page-loader" role="status" aria-live="polite" aria-label="Loading your invitation">
+    <span class="loader-monogram" aria-hidden="true">G <em>&</em> G</span>
+    <span class="loader-line" aria-hidden="true"></span>
+    <p class="loader-message">Preparing your invitation</p>
+    <button class="loader-retry" type="button" hidden onclick="location.reload()">Try again</button>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <section class="invitation-cover" aria-label="Open your wedding invitation" inert>
+    <div class="cover-orbit" aria-hidden="true"></div>
+    <span class="cover-star star-one" aria-hidden="true">✧</span><span class="cover-star star-two" aria-hidden="true">✧</span>
+    <p class="eyebrow cover-eyebrow">A little letter. A beautiful beginning.</p>
+    <h1 class="cover-title">Every adventure<br>begins with <em>love.</em></h1>
+    <div class="envelope">
+      <div class="letter"><span class="eyebrow">You are part of our story</span><strong>Gerald <i>&</i> Girlie</strong><span>18 December 2026</span><em>Our next adventure awaits.</em></div>
+      <div class="envelope-back"></div><div class="envelope-flap"></div><div class="envelope-pocket"></div>
+      <span class="envelope-line" aria-hidden="true"></span><span class="seal" aria-hidden="true">G<span>&</span>G</span>
+      <span class="envelope-address">To our dearest family & friends</span>
+      <button class="open-envelope" aria-label="Open the envelope and read Gerald and Girlie’s invitation"></button>
+    </div>
+    <p class="envelope-prompt" aria-live="polite">Tap the seal to begin our adventure <span>↗</span></p>
+    <p class="cover-date">GERALD & GIRLIE <span>·</span> 18.12.2026</p>
+    <div class="letter-stage" hidden>
+      <article class="centered-letter" aria-label="Your wedding invitation">
+        <span class="centered-letter-mark" aria-hidden="true">G & G</span>
+        <p class="eyebrow">You are part of our story</p>
+        <h2>Gerald <em>&</em> Girlie</h2>
+        <p class="centered-letter-message">With grateful hearts, we invite you<br>to the beginning of our forever.</p>
+        <p class="centered-letter-date">18 December 2026 <span>·</span> 3 PM</p>
+        <p class="centered-letter-venue">ICCM, Antipolo City, Rizal</p>
+        <em class="centered-letter-note">Our next adventure awaits.</em>
+        <button id="begin-adventure" type="button" disabled>Begin our adventure <span aria-hidden="true">↗</span></button>
+      </article>
+    </div>
+  </section>
+
+  <main id="journey" tabindex="-1" inert>
+    <div class="journey-track" aria-hidden="true"><span class="track-fill"></span></div>
+    <div class="chapter-counter" aria-live="polite"><span id="chapter-number">01</span><span class="counter-line"></span><span>06</span></div>
+    <section class="scene beginning" data-chapter="01">
+      <img class="scene-image" src="/images/forest-walk.jpg" alt="Gerald and Girlie holding hands among the pine trees" fetchpriority="high" />
+      <div class="scene-shade"></div><div class="floating-leaves" aria-hidden="true"></div>
+      <div class="beginning-copy"><p class="eyebrow">The adventure of a lifetime</p><h2>Some paths<br>are meant to be<br>walked <em>together.</em></h2><div class="couple-signature">Gerald <span>&</span> Girlie</div><p class="beginning-date">DECEMBER 18, 2026 <span>·</span> ANTIPOLO, RIZAL</p></div>
+      <a class="scroll-cue" href="#chapter-two"><span class="scroll-line"></span>SCROLL TO FOLLOW OUR STORY <span>↓</span></a>
+      <span class="scene-caption">Two hearts. One extraordinary journey.</span>
+    </section>
+    <section class="scene story" id="chapter-two" data-chapter="02">
+      <div class="story-path" aria-hidden="true"><svg viewBox="0 0 1200 1000" preserveAspectRatio="none"><path d="M-50 180C450-40 1100 150 830 390S130 330 350 640 1100 800 1260 1020" /></svg></div>
+      <div class="chapter-heading reveal"><p class="eyebrow">01 / The little things</p><h2>A life of little moments.<br><em>A love for all of them.</em></h2><p>The laughter. The quiet mornings. The hand to hold.<br>And now, a new beginning—with you by our side.</p></div>
+      <div class="scrapbook">
+        <button class="photo-card card-one reveal" data-photo="/images/embrace.jpg" aria-label="Enlarge the forest embrace photo"><img src="/images/embrace.jpg" alt="Gerald and Girlie smiling in the forest" loading="lazy" /><span>my favorite place is with you</span></button>
+        <button class="photo-card card-two reveal" data-photo="/images/cafe.jpg" aria-label="Enlarge the café photo"><img src="/images/cafe.jpg" alt="Sharing a smile over coffee" loading="lazy" /><span>the everyday kind of magic</span></button>
+        <button class="photo-card card-three reveal" data-photo="/images/piggyback.jpg" aria-label="Enlarge the piggyback photo"><img src="/images/piggyback.jpg" alt="A playful piggyback among the pine trees" loading="lazy" /><span>you, me & a little adventure</span></button>
+        <span class="scrapbook-note" aria-hidden="true">a few pages<br>from our story ↗</span>
+      </div>
+      <div class="memory-trail" aria-label="More pages from our story">
+        <button class="memory-photo reveal" data-photo="/images/roadside.jpg" aria-label="Enlarge the roadside portrait"><img src="/images/roadside.jpg" alt="Gerald and Girlie beside a roadside railing in the pine forest" loading="lazy" /><span>wherever the road takes us</span></button>
+        <button class="memory-photo reveal" data-photo="/images/reflection.jpg" aria-label="Enlarge the reflection photo"><img src="/images/reflection.jpg" alt="Gerald and Girlie reflected in a car window" loading="lazy" /><span>a glimpse of us</span></button>
+        <button class="memory-photo portrait reveal" data-photo="/images/close-together.jpg" aria-label="Enlarge the close embrace photo"><img src="/images/close-together.jpg" alt="Gerald holding Girlie close as they smile at each other on a forest road" loading="lazy" /><span>right here, beside you</span></button>
+        <button class="memory-photo reveal" data-photo="/images/playful.jpg" aria-label="Enlarge the playful portrait"><img src="/images/playful.jpg" alt="Girlie embracing Gerald as he playfully makes a peace sign" loading="lazy" /><span>never a dull moment</span></button>
+        <button class="memory-photo portrait reveal" data-photo="/images/forest-climb.jpg" aria-label="Enlarge the forest climb photo"><img src="/images/forest-climb.jpg" alt="Gerald and Girlie climbing a grassy slope hand in hand between pine trees" loading="lazy" /><span>every uphill, together</span></button>
+        <button class="memory-photo portrait reveal" data-photo="/images/hand-in-hand.jpg" aria-label="Enlarge the hand in hand photo"><img src="/images/hand-in-hand.jpg" alt="Gerald and Girlie walking hand in hand beneath tall pine trees" loading="lazy" /><span>one step at a time</span></button>
+        <button class="memory-photo coffee-detail reveal" data-photo="/images/coffee-cups.jpg" aria-label="Enlarge the coffee cups photo"><img src="/images/coffee-cups.jpg" alt="Their hands holding blue and brown cups of coffee together" loading="lazy" /><span>and time for the little things</span></button>
+      </div>
+      <span class="chapter-bottom">AND THE BEST PART IS STILL TO COME <span>↓</span></span>
+    </section>
+    <section class="scene destination" data-chapter="03">
+      <img class="scene-image" src="/images/running.jpg" alt="Gerald and Girlie running hand in hand along a forest road" loading="lazy" /><div class="scene-shade"></div>
+      <div class="destination-copy reveal"><p class="eyebrow">02 / Our next destination</p><h2>The beginning<br>of <em>forever.</em></h2><p>With grateful hearts, together with our families,<br>we invite you to witness our wedding.</p><div class="date-display"><span>DEC</span><strong>18</strong><span>2026</span></div><p class="ceremony-time">FRIDAY <span>·</span> THREE O’CLOCK IN THE AFTERNOON</p><h3>ICCM</h3><p>Antipolo City, Rizal</p><div class="destination-actions"><a class="light-button" href="https://www.google.com/maps/search/?api=1&query=ICCM%20Antipolo%20City%20Rizal" target="_blank" rel="noopener noreferrer">Find our destination <span>↗</span></a><button class="text-button" id="save-date">Save the date <span>＋</span></button></div></div>
+      <div class="countdown" aria-label="Countdown to the wedding"><div><strong id="days">—</strong><span>DAYS</span></div><div><strong id="hours">—</strong><span>HOURS</span></div><div><strong id="minutes">—</strong><span>MINUTES</span></div><span class="countdown-note">until our next chapter</span></div>
+    </section>
+    <section class="scene companions" data-chapter="04">
+      <div class="compass" aria-hidden="true"><span>N</span><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88"/><circle cx="100" cy="100" r="65"/><path d="M100 10L115 85 190 100 115 115 100 190 85 115 10 100 85 85Z"/><path d="M35 35L100 100 165 165M165 35L100 100 35 165"/></svg></div>
+      <div class="chapter-heading reveal"><p class="eyebrow">03 / Our traveling companions</p><h2>By our side.<br><em>In our hearts.</em></h2><p>The people who make the journey even more beautiful.</p></div>
+      <div class="entourage reveal"><div><h3>The groomsmen</h3><ul><li>Lean Karl Castillo</li><li>Dave Gonzaga</li><li>Prince Jayden Agregado</li></ul></div><span class="entourage-divider" aria-hidden="true">&</span><div><h3>The bridesmaids</h3><ul><li>Manilyn Laggui</li><li>Liezel Gonzaga</li><li>Deborah Lee Garcia</li><li>Florence Garcia</li><li>Jeanine Linea Pasco</li><li>Precious Reign Garga</li></ul></div></div>
+      <div class="palette-section reveal"><p class="eyebrow">The colors of our celebration</p><h3>Earthy hues. Warm hearts.</h3><div class="swatches"><div style="--swatch:#d7c1a3"><i></i><span>Champagne</span></div><div style="--swatch:#b79f86"><i></i><span>Taupe</span></div><div style="--swatch:#b88a5a"><i></i><span>Camel</span></div><div style="--swatch:#765545"><i></i><span>Mocha</span></div><div style="--swatch:#94451f"><i></i><span>Sienna</span></div><div style="--swatch:#57362c"><i></i><span>Chocolate</span></div><div style="--swatch:#6b5e42"><i></i><span>Olive brown</span></div></div><div class="palette-links"><button data-photo="/images/groomsmen-palette.jpg">Groomsmen attire reference ↗</button><button data-photo="/images/bridesmaids-palette.jpg">Bridesmaids attire reference ↗</button></div></div>
+    </section>
+    <section class="scene keepsakes" data-chapter="05">
+      <div class="keepsake-photo"><img src="/images/dance.jpg" alt="Gerald twirling Girlie on a grassy forest path" loading="lazy" /><span>Here’s to being present<br>for the beautiful things.</span></div>
+      <div class="keepsake-copy"><p class="eyebrow reveal">04 / A few loving notes</p><h2 class="reveal">Come as a guest.<br><em>Leave with a memory.</em></h2>
+        <details class="note reveal" open><summary><span>01</span> An intimate celebration <i>＋</i></summary><p>We look forward to celebrating our special day with you! Our wedding will be an adults-only occasion. We can accommodate only the guests named on the invitation, so no additional plus-ones, please. Thank you for understanding.</p></details>
+        <details class="note reveal"><summary><span>02</span> An unplugged “I do” <i>＋</i></summary><p>We have but one plea: please keep our ceremony camera-free. Be present with us while our photographers capture the moment. Once the ceremony is over, you’re welcome to start snapping shots at the reception!</p></details>
+        <details class="note reveal"><summary><span>03</span> Your presence is our gift <i>＋</i></summary><p>There is no better gift than the honor of your presence. However, if we are blessed with a gift from you, we respectfully request a monetary token instead. Thank you so much!</p></details>
+      </div>
+    </section>
+    <section class="scene final-letter" data-chapter="06">
+      <div class="final-background" aria-hidden="true"><img src="/images/picnic.jpg" alt="" loading="lazy" /></div>
+      <div class="final-paper reveal"><span class="paper-pin" aria-hidden="true">✧</span><p class="eyebrow">05 / This is your invitation</p><h2>Our adventure<br>is sweeter<br><em>with you in it.</em></h2><span class="seat-number">1</span><p class="seat-label">WE HAVE RESERVED ONE SEAT FOR YOU</p><p>Please join us as we begin this new chapter.<br>Your presence means the world to us.</p><div class="final-signature">With love,<strong>Gerald & Girlie</strong></div><p class="paper-date">18 DECEMBER 2026 <span>·</span> 3 PM <span>·</span> ICCM</p><button class="back-start" id="back-start">Back to the beginning ↑</button></div>
+      <span class="ending-caption">A new chapter. The same us. A lifetime to go.</span>
+    </section>
+    <button class="scroll-top-control" id="scroll-top" type="button" aria-label="Scroll to the top" title="Back to top"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg></button>
+    <div class="sound-control" role="group" aria-label="Music controls">
+      <button class="music-toggle" id="sound-control" type="button" aria-label="Music recording not yet available" aria-disabled="true"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sound-label">Music coming soon</span></button>
+      <label class="volume-control"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5ZM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></svg><input id="music-volume" type="range" min="0" max="100" step="1" value="30" aria-label="Music volume" aria-valuetext="30 percent" disabled /><output id="volume-value" for="music-volume" aria-hidden="true">30%</output></label>
+    </div>
+    <div class="toast" role="status"></div>
+  </main>
+  <dialog id="photo-dialog"><button id="close-photo" aria-label="Close enlarged photo">×</button><img id="full-photo" alt="Enlarged wedding photo or attire reference" /></dialog>
+  <noscript><style>.page-loader{display:none}.invitation-cover{display:none}main{display:none}</style><p style="padding:24px;font-family:Georgia,serif;color:#57362c">Please enable JavaScript to open the animated invitation.</p></noscript>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

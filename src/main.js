@@ -142,17 +142,50 @@ document.querySelectorAll('.note').forEach(note => note.addEventListener('toggle
   ], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' });
 }));
 let photoTrigger;
+let photoRequest = 0;
 document.querySelectorAll('[data-photo]').forEach(button => button.addEventListener('click', () => {
   photoTrigger = button;
-  document.querySelector('#full-photo').src = button.dataset.photo;
-  document.querySelector('#full-photo').alt = button.querySelector('img')?.alt || button.textContent.trim();
+  const request = ++photoRequest;
+  const thumbnail = button.querySelector('img');
+  // Replace the node before opening: changing src on the old node can leave
+  // its last decoded picture visible while the next picture downloads.
+  const preview = document.createElement('img');
+  preview.id = 'full-photo';
+  preview.alt = thumbnail?.alt || button.textContent.trim();
+  const frameStyle = thumbnail && getComputedStyle(thumbnail);
+  const frameRatio = thumbnail ? parseFloat(frameStyle.width) / parseFloat(frameStyle.height) : null;
+  dialog.classList.toggle('framed-photo', !!thumbnail);
+  dialog.style.setProperty('--photo-ratio', frameRatio || 1);
+  dialog.style.setProperty('--photo-width', frameRatio ? `min(88vw, calc(82svh * ${frameRatio}))` : 'auto');
+  dialog.style.setProperty('--photo-position', frameStyle?.objectPosition || '50% 50%');
+  if (thumbnail) preview.src = thumbnail.currentSrc || thumbnail.src;
+  document.querySelector('#full-photo').replaceWith(preview);
+  dialog.classList.toggle('photo-loading', !thumbnail);
   dialog.showModal();
   document.body.classList.add('photo-open');
+  // The cached frame picture is visible immediately. Swap in the larger
+  // picture only after decoding it, and ignore requests from closed viewers.
+  const full = new Image();
+  full.id = 'full-photo';
+  full.alt = preview.alt;
+  full.onload = async () => {
+    await full.decode().catch(() => {});
+    if (request !== photoRequest || !dialog.open) return;
+    preview.replaceWith(full);
+    dialog.classList.remove('photo-loading');
+  };
+  full.onerror = () => {
+    if (request !== photoRequest || !dialog.open) return;
+    dialog.classList.remove('photo-loading');
+    if (!thumbnail) toast('This image could not load. Please try again.');
+  };
+  full.src = button.dataset.photo;
 }));
 function closePhoto() { dialog.close(); }
 document.querySelector('#close-photo').addEventListener('click', closePhoto);
 dialog.addEventListener('click', event => { if (event.target === dialog) closePhoto(); });
 dialog.addEventListener('close', () => {
+  photoRequest++;
   document.body.classList.remove('photo-open');
   photoTrigger?.focus({ preventScroll: true });
 });

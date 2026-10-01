@@ -23,6 +23,11 @@
 .volume-control:focus-within #volume-value{color:var(--rust)}
 dialog[open]{animation:photo-opens .4s cubic-bezier(.22,1,.36,1)}
 dialog[open]::backdrop{animation:backdrop-opens .35s ease-out}
+#photo-dialog.framed-photo img{width:var(--photo-width);height:auto;max-width:none;max-height:none;aspect-ratio:var(--photo-ratio);object-fit:cover;object-position:var(--photo-position)}
+.photo-loading-label{display:none}
+#photo-dialog.photo-loading{min-width:min(300px,80vw);min-height:180px;background:var(--paper)}
+#photo-dialog.photo-loading .photo-loading-label{display:grid;position:absolute;inset:0;place-items:center;font-size:12px;color:var(--ink)}
+#photo-dialog.photo-loading img{visibility:hidden}
 @keyframes photo-opens{from{opacity:0;scale:.92;translate:0 20px}to{opacity:1;scale:1;translate:0 0}}
 @keyframes backdrop-opens{from{opacity:0}to{opacity:1}}
 @media(hover:hover) and (pointer:fine){

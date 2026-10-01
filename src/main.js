@@ -135,12 +135,60 @@ document.querySelector('#save-date').addEventListener('click', () => {
 });
 
 const dialog = document.querySelector('#photo-dialog');
-document.querySelectorAll('.note').forEach(note => note.addEventListener('toggle', () => {
-  if (note.open && !reducedMotion.matches) note.querySelector('p').animate([
-    { opacity: 0, translate: '0 -8px' },
-    { opacity: 1, translate: '0 0' },
-  ], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' });
-}));
+const notes = [...document.querySelectorAll('.note')];
+const noteStates = new Map(notes.map(note => [note, { expanded: note.open, animation: null, fade: null }]));
+function animateNote(note, expanded) {
+  const state = noteStates.get(note);
+  if (state.expanded === expanded) return;
+  const startHeight = note.getBoundingClientRect().height;
+  const paragraph = note.querySelector('p');
+  const startOpacity = note.open ? getComputedStyle(paragraph).opacity : '0';
+  state.animation?.cancel();
+  state.fade?.cancel();
+  state.expanded = expanded;
+  note.classList.toggle('is-expanded', expanded);
+  note.querySelector('summary').setAttribute('aria-expanded', String(expanded));
+  if (reducedMotion.matches) {
+    note.open = expanded;
+    note.style.height = '';
+    return;
+  }
+  // Keep the details open while retracting so its content can slide away.
+  note.open = true;
+  note.style.height = '';
+  const style = getComputedStyle(note);
+  const targetHeight = expanded ? note.getBoundingClientRect().height
+    : note.querySelector('summary').getBoundingClientRect().height + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+  note.style.height = `${startHeight}px`;
+  const animation = note.animate([{ height: `${startHeight}px` }, { height: `${targetHeight}px` }], {
+    duration: 450, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards',
+  });
+  state.animation = animation;
+  state.fade = paragraph.animate([{ opacity: startOpacity }, { opacity: expanded ? 1 : 0 }], {
+    duration: expanded ? 380 : 220, easing: 'ease-out', fill: 'forwards',
+  });
+  animation.finished.then(() => {
+    if (state.animation !== animation) return;
+    note.open = expanded;
+    note.style.height = '';
+    animation.cancel();
+    state.fade?.cancel();
+    state.animation = null;
+    state.fade = null;
+  }).catch(() => {});
+}
+for (const note of notes) {
+  const summary = note.querySelector('summary');
+  note.classList.add('animated-note');
+  note.classList.toggle('is-expanded', note.open);
+  summary.setAttribute('aria-expanded', String(note.open));
+  summary.addEventListener('click', event => {
+    event.preventDefault();
+    const expanded = !noteStates.get(note).expanded;
+    if (expanded) for (const other of notes) if (other !== note) animateNote(other, false);
+    animateNote(note, expanded);
+  });
+}
 let photoTrigger;
 let photoRequest = 0;
 document.querySelectorAll('[data-photo]').forEach(button => button.addEventListener('click', () => {

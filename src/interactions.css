@@ -7,6 +7,10 @@
 .note summary:active{color:var(--rust)}
 .note summary:focus-visible{color:var(--rust)}
 .note summary i{transition:transform .4s cubic-bezier(.34,1.56,.64,1),color .25s}
+.note.animated-note{overflow:clip}
+.note.animated-note summary:focus-visible{outline-offset:-2px}
+.note.animated-note summary i{transform:rotate(0deg)}
+.note.animated-note.is-expanded summary i{transform:rotate(45deg)}
 .photo-card.reveal{transition:opacity 1.1s,transform 1.3s cubic-bezier(.22,1,.36,1),scale .25s,box-shadow .4s}
 .memory-photo.reveal{transition:opacity 1.1s,transform 1.3s cubic-bezier(.22,1,.36,1),rotate .4s,scale .25s,box-shadow .4s}
 :is(.photo-card,.memory-photo):active{scale:.97}

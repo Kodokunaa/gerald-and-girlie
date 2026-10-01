@@ -1,9 +1,9 @@
+import { setupMusic } from './music.js';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const main = document.querySelector('main');
 const cover = document.querySelector('.invitation-cover');
 const envelope = document.querySelector('.envelope');
 let opened = false;
-let audio = null;
 let toastTimer;
 
 function toast(message) {
@@ -14,27 +14,14 @@ function toast(message) {
   toastTimer = setTimeout(() => target.classList.remove('visible'), 4500);
 }
 
-// Only the supplied keyboard instrumental belongs here. No replacement track.
-fetch('/audio/been-so-good-keyboard.mp3', { method: 'HEAD' }).then(response => {
-  if (response.ok && response.headers.get('content-type')?.startsWith('audio/')) {
-    audio = new Audio('/audio/been-so-good-keyboard.mp3');
-    audio.preload = 'auto';
-    audio.loop = true;
-    audio.volume = Number(document.querySelector('#music-volume').value) / 100;
-    audio.addEventListener('play', updateSound);
-    audio.addEventListener('pause', updateSound);
-    document.querySelector('#sound-control').removeAttribute('aria-disabled');
-    document.querySelector('#music-volume').disabled = false;
-    updateSound();
-  }
-}).catch(() => {});
-
-function updateSound() {
-  const playing = audio && !audio.paused;
-  document.querySelector('#sound-control').classList.toggle('playing', !!playing);
-  document.querySelector('#sound-label').textContent = playing ? 'Music on' : 'Music off';
-  document.querySelector('#sound-control').setAttribute('aria-label', playing ? 'Pause keyboard instrumental' : 'Play keyboard instrumental');
-}
+const music = setupMusic({
+  audio: document.querySelector('#wedding-music'),
+  toggle: document.querySelector('#sound-control'),
+  volume: document.querySelector('#music-volume'),
+  label: document.querySelector('#sound-label'),
+  output: document.querySelector('#volume-value'),
+  notify: toast,
+});
 
 document.querySelector('.open-envelope').addEventListener('click', async (event) => {
   if (opened) return;
@@ -43,7 +30,6 @@ document.querySelector('.open-envelope').addEventListener('click', async (event)
   envelope.classList.add('is-open');
   cover.classList.add('unsealing');
   document.querySelector('.envelope-prompt').textContent = 'Your next adventure is unfolding…';
-  if (audio) audio.play().then(updateSound).catch(updateSound);
   setTimeout(async () => {
     // Transfer the paper at its exact on-screen position. It remains visible
     // as it grows into the centered letter instead of fading into a new card.
@@ -76,6 +62,7 @@ document.querySelector('.open-envelope').addEventListener('click', async (event)
 });
 
 document.querySelector('#begin-adventure').addEventListener('click', (event) => {
+  void music.play();
   event.currentTarget.disabled = true;
   document.body.classList.add('entered');
   main.inert = false;
@@ -84,19 +71,6 @@ document.querySelector('#begin-adventure').addEventListener('click', (event) => 
   main.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: 'instant' });
   setTimeout(() => cover.hidden = true, reducedMotion.matches ? 0 : 1500);
-});
-
-document.querySelector('#sound-control').addEventListener('click', () => {
-  if (!audio) return toast('The keyboard instrumental will be added when the recording is ready.');
-  if (audio.paused) audio.play().then(updateSound).catch(() => toast('Playback could not start. Please try again.'));
-  else { audio.pause(); updateSound(); }
-});
-
-document.querySelector('#music-volume').addEventListener('input', (event) => {
-  const volume = Number(event.currentTarget.value);
-  if (audio) audio.volume = volume / 100;
-  event.currentTarget.setAttribute('aria-valuetext', `${volume} percent`);
-  document.querySelector('#volume-value').textContent = `${volume}%`;
 });
 
 const observer = new IntersectionObserver(entries => {

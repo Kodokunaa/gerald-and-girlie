@@ -9,7 +9,7 @@ class Control extends EventTarget {
   setAttribute(key, value) { this.attributes.set(key, value); }
   removeAttribute(key) { this.attributes.delete(key); }
 }
-function fixture(playImplementation) {
+function fixture(playImplementation, schedule) {
   const audio = new Control();
   audio.paused = true; audio.readyState = 0; audio.volume = 1;
   audio.play = playImplementation || (() => { audio.paused = false; return Promise.resolve(); });
@@ -17,7 +17,7 @@ function fixture(playImplementation) {
   audio.load = () => {};
   const toggle = new Control(), volume = new Control(), label = new Control(), output = new Control();
   const messages = [];
-  const player = setupMusic({ audio, toggle, volume, label, output, notify: message => messages.push(message) });
+  const player = setupMusic({ audio, toggle, volume, label, output, notify: message => messages.push(message), schedule });
   return { audio, toggle, volume, label, output, messages, player };
 }
 test('calls playback immediately without waiting for a network readiness check', async () => {
@@ -55,6 +55,21 @@ test('starts at full volume and allows the guest to pause', async () => {
   assert.equal(instance.audio.volume, 1);
   instance.toggle.dispatchEvent(new Event('click'));
   assert.equal(instance.audio.paused, true);
+});
+
+test('envelope click unlocks music silently, then starts sound after one second', async () => {
+  let revealSound, delay;
+  const instance = fixture(undefined, (callback, milliseconds) => { revealSound = callback; delay = milliseconds; });
+  instance.player.startAfter(1000);
+  assert.equal(instance.audio.paused, false);
+  assert.equal(instance.audio.volume, 0);
+  assert.equal(delay, 1000);
+  instance.audio.currentTime = 1;
+  revealSound();
+  assert.equal(instance.audio.currentTime, 0);
+  assert.equal(instance.audio.volume, 1);
+  await Promise.resolve();
+  assert.equal(instance.label.textContent, 'Music on');
 });
 test('loading failure offers retry rather than leaving music unavailable', async () => {
   const instance = fixture(() => Promise.reject(Object.assign(new Error(), { name: 'NotSupportedError' })));

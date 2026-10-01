@@ -1,8 +1,8 @@
 /* Use individual scale/translate so the existing reveal transforms stay intact. */
-:is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry){transition:scale .22s cubic-bezier(.22,1,.36,1),translate .3s cubic-bezier(.22,1,.36,1),background .25s,color .25s,box-shadow .3s}
-:is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry):active:not(:disabled){scale:.94}
-:is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry):focus-visible{translate:0 -2px;box-shadow:0 5px 18px #57362c20}
-:is(#begin-adventure,.light-button,.text-button) > span{display:inline-block;transition:translate .3s cubic-bezier(.22,1,.36,1)}
+:is(.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry){transition:scale .22s cubic-bezier(.22,1,.36,1),translate .3s cubic-bezier(.22,1,.36,1),background .25s,color .25s,box-shadow .3s}
+:is(.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry):active:not(:disabled){scale:.94}
+:is(.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.scroll-top-control,#close-photo,.loader-retry):focus-visible{translate:0 -2px;box-shadow:0 5px 18px #57362c20}
+:is(.light-button,.text-button) > span{display:inline-block;transition:translate .3s cubic-bezier(.22,1,.36,1)}
 .note summary{transition:color .25s}
 .note summary:active{color:var(--rust)}
 .note summary:focus-visible{color:var(--rust)}
@@ -35,9 +35,9 @@ dialog[open]::backdrop{animation:backdrop-opens .35s ease-out}
 @keyframes photo-opens{from{opacity:0;scale:.92;translate:0 20px}to{opacity:1;scale:1;translate:0 0}}
 @keyframes backdrop-opens{from{opacity:0}to{opacity:1}}
 @media(hover:hover) and (pointer:fine){
-  :is(#begin-adventure,.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.loader-retry):hover:not(:disabled){translate:0 -3px}
-  :is(#begin-adventure,.light-button):hover:not(:disabled){box-shadow:0 8px 24px #57362c25}
-  :is(#begin-adventure,.light-button):hover>span{translate:3px -3px}
+  :is(.light-button,.text-button,.palette-links button,.back-start,.music-toggle,.loader-retry):hover:not(:disabled){translate:0 -3px}
+  :is(.light-button):hover:not(:disabled){box-shadow:0 8px 24px #57362c25}
+  :is(.light-button):hover>span{translate:3px -3px}
   .text-button:hover>span{translate:0 -2px}
   :is(.palette-links button,.back-start,.music-toggle):hover{color:var(--rust)}
   .note summary:hover{color:var(--rust)}
@@ -48,5 +48,5 @@ dialog[open]::backdrop{animation:backdrop-opens .35s ease-out}
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{animation:none!important;transition:none!important}
   :is(button,a,summary):active,:is(button,a,summary):focus-visible,:is(button,a,summary):hover{scale:1;translate:none}
-  :is(#begin-adventure,.light-button,.text-button,.scroll-cue)>span,.scroll-top-control svg{translate:none!important}
+  :is(.light-button,.text-button,.scroll-cue)>span,.scroll-top-control svg{translate:none!important}
 }

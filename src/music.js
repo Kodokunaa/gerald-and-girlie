@@ -1,4 +1,4 @@
-export function setupMusic({ audio, toggle, volume, label, output, notify }) {
+export function setupMusic({ audio, toggle, volume, label, output, notify, schedule = setTimeout }) {
   let loading = false;
   let failed = false;
   let request = 0;
@@ -57,5 +57,16 @@ export function setupMusic({ audio, toggle, volume, label, output, notify }) {
   audio.addEventListener('error', () => { failed = true; loading = false; update(); });
   audio.addEventListener('volumechange', update);
   update();
-  return { play };
+  function startAfter(delay) {
+    // Unlock playback inside the envelope click, silently. Reveal the sound
+    // at the same time as the page transition, starting from the beginning.
+    audio.volume = 0;
+    void play();
+    schedule(() => {
+      audio.currentTime = 0;
+      audio.volume = Number(volume.value) / 100;
+      update();
+    }, delay);
+  }
+  return { play, startAfter };
 }

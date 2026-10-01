@@ -23,56 +23,24 @@ const music = setupMusic({
   notify: toast,
 });
 
-document.querySelector('.open-envelope').addEventListener('click', async (event) => {
+document.querySelector('.open-envelope').addEventListener('click', event => {
   if (opened) return;
   opened = true;
   event.currentTarget.disabled = true;
   envelope.classList.add('is-open');
   cover.classList.add('unsealing');
   document.querySelector('.envelope-prompt').textContent = 'Your next adventure is unfolding…';
-  setTimeout(async () => {
-    // Transfer the paper at its exact on-screen position. It remains visible
-    // as it grows into the centered letter instead of fading into a new card.
-    const paperBounds = envelope.querySelector('.letter').getBoundingClientRect();
-    const letterStage = document.querySelector('.letter-stage');
-    letterStage.hidden = false;
-    const centeredLetter = letterStage.querySelector('.centered-letter');
-    const centerBounds = centeredLetter.getBoundingClientRect();
-    const offsetX = paperBounds.left + paperBounds.width / 2 - (centerBounds.left + centerBounds.width / 2);
-    const offsetY = paperBounds.top + paperBounds.height / 2 - (centerBounds.top + centerBounds.height / 2);
-    const movingPaper = reducedMotion.matches ? null : centeredLetter.animate([
-      { transform: `translate(${offsetX}px, ${offsetY}px) scale(${paperBounds.width / centerBounds.width}, ${paperBounds.height / centerBounds.height})`, boxShadow: '0 8px 20px #57362c18' },
-      { transform: 'translate(0, 0) scale(1, 1)', boxShadow: '0 24px 70px #57362c25' },
-    ], { duration: 1800, easing: 'cubic-bezier(.22,1,.36,1)' });
-    if (!reducedMotion.matches) for (const element of centeredLetter.children) {
-      element.animate([{ opacity: 0 }, { opacity: 1 }], {
-        duration: 1000, delay: 150, easing: 'ease-out', fill: 'backwards',
-      });
-    }
-    cover.classList.add('reading-letter');
-    for (const element of cover.children) if (element !== letterStage) {
-      element.inert = true;
-      element.setAttribute('aria-hidden', 'true');
-    }
-    if (movingPaper) await movingPaper.finished.catch(() => {});
-    const continueButton = document.querySelector('#begin-adventure');
-    continueButton.disabled = false;
-    continueButton.focus({ preventScroll: true });
-  }, reducedMotion.matches ? 0 : 1200);
+  music.startAfter(1000);
+  setTimeout(() => {
+    document.body.classList.add('entered');
+    main.inert = false;
+    cover.classList.add('departing');
+    cover.inert = true;
+    main.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1200);
+  }, 1000);
 });
-
-document.querySelector('#begin-adventure').addEventListener('click', (event) => {
-  void music.play();
-  event.currentTarget.disabled = true;
-  document.body.classList.add('entered');
-  main.inert = false;
-  cover.classList.add('departing');
-  cover.inert = true;
-  main.focus({ preventScroll: true });
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  setTimeout(() => cover.hidden = true, reducedMotion.matches ? 0 : 1500);
-});
-
 const observer = new IntersectionObserver(entries => {
   for (const entry of entries) if (entry.isIntersecting) {
     entry.target.classList.add('visible');

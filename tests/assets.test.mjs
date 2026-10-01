@@ -9,7 +9,7 @@ test('all invitation media and responsive image references exist', () => {
   references.push(...[...html.matchAll(/(\/images\/[^" ,]+) \d+w/g)].map(match => match[1]));
   assert.ok(references.length > 30);
   for (const reference of new Set(references)) assert.ok(fs.existsSync(`public${reference}`), reference);
-  assert.equal(new Set(references.filter(reference => reference.endsWith('.webp') && !reference.includes('-640'))).size, 14);
+  assert.equal(new Set(references.filter(reference => reference.endsWith('.webp')).map(reference => reference.replace(/-(?:640|wide|detail)\.webp$/, '.webp'))).size, 14);
 });
 
 test('social preview points to the production site and a real thumbnail', () => {

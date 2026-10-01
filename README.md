@@ -16,4 +16,6 @@ The countdown and calendar invitation use 3 PM Philippine time on December 18, 2
 
 Social link previews use `public/og-wedding.jpg` at 1200 × 630, with the production URL `https://gerald-and-girlie.vercel.app/`. Photographs use WebP with 640px mobile alternatives, lazy loading below the first scene, and explicit dimensions. Vercel serves static assets with cache headers. Generated assets are checked in, so production builds require no media processing.
 
+The resolution review restored original-photo detail in 13 display assets: the forest walk, running, and picnic backgrounds have 2560px-wide alternatives, and all ten clickable wedding photographs have separate 3200px-long-edge detail versions loaded only when opened. Existing small previews remain available. The black-and-white dance photograph retains its intentional grain; both attire guides already have readable text and adequate display resolution. Original photographs have 4096–7008px long edges, so these improved copies use actual original detail without synthesizing faces or enlarging beyond the originals.
+
 Run `npm test` for music controls and local asset references, then `npm run build` to validate the production bundle.

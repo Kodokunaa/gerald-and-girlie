@@ -35,6 +35,10 @@
   .destination-actions{flex-wrap:wrap;gap:12px 20px}
   .palette-links button{max-width:145px}
   .countdown div span,.swatches span{font-size:10px}
+  .countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 10px;width:100%;max-width:340px;text-align:center}
+  .countdown strong{font-size:clamp(32px,9vw,42px);font-variant-numeric:tabular-nums}
+  .countdown div span{font-size:9px;letter-spacing:1px}
+  .countdown-note{grid-column:1/-1}
   .chapter-bottom{font-size:10px;letter-spacing:1px;line-height:1.6}
   .final-paper>.eyebrow,.seat-label,.paper-date{font-size:10px;letter-spacing:1px;line-height:1.6;text-wrap:balance}
   .paper-date span{margin:0 4px}

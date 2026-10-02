@@ -89,10 +89,11 @@ function countdown() {
   document.querySelector('#days').textContent = Math.floor(remaining / 86400000).toString().padStart(2, '0');
   document.querySelector('#hours').textContent = Math.floor(remaining / 3600000 % 24).toString().padStart(2, '0');
   document.querySelector('#minutes').textContent = Math.floor(remaining / 60000 % 60).toString().padStart(2, '0');
+  document.querySelector('#seconds').textContent = Math.floor(remaining / 1000 % 60).toString().padStart(2, '0');
   if (!remaining) document.querySelector('.countdown-note').textContent = 'our forever has begun';
 }
 countdown();
-setInterval(countdown, 30000);
+setInterval(countdown, 1000);
 
 const dialog = document.querySelector('#photo-dialog');
 const notes = [...document.querySelectorAll('.note')];

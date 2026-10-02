@@ -177,6 +177,7 @@ document.querySelectorAll('[data-photo]').forEach(button => button.addEventListe
   dialog.style.setProperty('--photo-position', frameStyle?.objectPosition || '50% 50%');
   if (thumbnail) preview.src = thumbnail.currentSrc || thumbnail.src;
   document.querySelector('#full-photo').replaceWith(preview);
+  dialog.querySelector('.photo-loading-label').textContent = 'Loading image…';
   dialog.classList.toggle('photo-loading', !thumbnail);
   dialog.showModal();
   document.body.classList.add('photo-open');
@@ -193,8 +194,10 @@ document.querySelectorAll('[data-photo]').forEach(button => button.addEventListe
   };
   full.onerror = () => {
     if (request !== photoRequest || !dialog.open) return;
-    dialog.classList.remove('photo-loading');
-    if (!thumbnail) toast('This image could not load. Please try again.');
+    if (!thumbnail) {
+      dialog.classList.add('photo-loading');
+      dialog.querySelector('.photo-loading-label').textContent = 'Image could not load. Close and try again.';
+    }
   };
   full.src = button.dataset.photo;
 }));

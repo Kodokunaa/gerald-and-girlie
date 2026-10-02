@@ -9,3 +9,21 @@
 .invitation-cover.departing{transform:scale(1.04);transition:opacity 1.4s ease,transform 1.4s ease}
 .invitation-cover.departing .letter{transform:translateY(-60%);opacity:1;z-index:1}
 @media(max-width:760px){.invitation-cover.unsealing .cover-title,.invitation-cover.unsealing .cover-eyebrow{transform:translateY(-40px)}.invitation-cover.unsealing .envelope-prompt,.invitation-cover.unsealing .cover-date{transform:translateY(18px)}}
+@media(max-width:380px){.envelope{width:min(310px,88vw)}}
+@media(max-height:500px) and (min-width:560px){
+  .invitation-cover{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto;gap:14px 24px;padding:24px;justify-items:center;align-items:center}
+  .cover-eyebrow{grid-column:1;grid-row:1;margin:0;font-size:8px;letter-spacing:1.5px;text-align:center}
+  .cover-title{grid-column:1;grid-row:2;font-size:clamp(32px,4.6vw,46px);letter-spacing:-1px}
+  .envelope{grid-column:2;grid-row:1 / 3;width:min(280px,38vw);height:160px;margin:0}
+  .envelope-prompt{grid-column:2;grid-row:3;margin:0;font-size:8px;letter-spacing:1px;text-align:center}
+  .cover-date{grid-column:1;grid-row:3;margin:0;font-size:8px;letter-spacing:1px;text-align:center}
+  .envelope-address{font-size:14px;bottom:20px}
+  .seal{width:54px;height:54px}
+  .letter{padding:12px 8px}
+  .letter strong{font-size:24px;margin:6px 0}
+  .letter>span:not(.eyebrow),.letter em{font-size:14px}
+  .letter em{margin-top:8px}
+  .envelope.is-open .letter,.invitation-cover.departing .letter{transform:translateY(-40%)}
+  .invitation-cover.unsealing .cover-title,.invitation-cover.unsealing .cover-eyebrow{transform:translateY(-12px)}
+  .invitation-cover.unsealing .envelope-prompt,.invitation-cover.unsealing .cover-date{transform:translateY(8px)}
+}

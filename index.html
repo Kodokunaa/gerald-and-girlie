@@ -76,7 +76,7 @@
 
   <main id="journey" tabindex="-1" inert>
     <div class="journey-track" aria-hidden="true"><span class="track-fill"></span></div>
-    <div class="chapter-counter" aria-live="polite"><span id="chapter-number">01</span><span class="counter-line"></span><span>06</span></div>
+    <div class="chapter-counter" role="group" aria-label="Current chapter"><span id="chapter-number">01</span><span class="counter-line"></span><span>06</span></div>
     <section class="scene beginning" data-chapter="01">
       <img class="scene-image" src="/images/forest-walk.webp" srcset="/images/forest-walk-640.webp 640w, /images/forest-walk.webp 1280w, /images/forest-walk-wide.webp 2560w" sizes="100vw" width="1280" height="1920" decoding="async" alt="Gerald and Girlie holding hands among the pine trees" fetchpriority="high" />
       <div class="scene-shade"></div><div class="floating-leaves" aria-hidden="true"></div>
@@ -136,7 +136,7 @@
     </div>
     <div class="toast" role="status"></div>
   </main>
-  <dialog id="photo-dialog"><button id="close-photo" aria-label="Close enlarged photo">×</button><span class="photo-loading-label" role="status">Loading image…</span><img id="full-photo" alt="Enlarged wedding photo or attire reference" /></dialog>
+  <dialog id="photo-dialog" aria-label="Wedding photos and attire references"><button id="close-photo" aria-label="Close enlarged photo">×</button><span class="photo-loading-label" role="status">Loading image…</span><img id="full-photo" alt="Enlarged wedding photo or attire reference" /></dialog>
   <noscript><style>.page-loader{display:none}.invitation-cover{display:none}main{display:none}</style><p style="padding:24px;font-family:Georgia,serif;color:#57362c">Please enable JavaScript to open the animated invitation.</p></noscript>
   <script type="module" src="/src/main.js"></script>
 </body>

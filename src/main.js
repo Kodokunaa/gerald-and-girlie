@@ -94,15 +94,6 @@ function countdown() {
 countdown();
 setInterval(countdown, 30000);
 
-document.querySelector('#save-date').addEventListener('click', () => {
-  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Gerald and Girlie//Wedding//EN','BEGIN:VEVENT','UID:gerald-girlie-20261218@wedding.local','DTSTAMP:20261001T000000Z','DTSTART:20261218T070000Z','SUMMARY:Gerald & Girlie’s Wedding','LOCATION:ICCM\\, Antipolo City\\, Rizal','DESCRIPTION:Celebrate the wedding of Gerald and Girlie. Ceremony begins at 3 PM Philippine time.','END:VEVENT','END:VCALENDAR',''].join('\r\n');
-  const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
-  const link = document.createElement('a');
-  link.href = url; link.download = 'gerald-and-girlie-wedding.ics'; link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  toast('Your calendar invitation is ready to save.');
-});
-
 const dialog = document.querySelector('#photo-dialog');
 const notes = [...document.querySelectorAll('.note')];
 const noteStates = new Map(notes.map(note => [note, { expanded: note.open, animation: null, fade: null }]));

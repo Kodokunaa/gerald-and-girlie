@@ -12,7 +12,7 @@ Run `npm install`, then `npm run dev`. Production: `npm run build`.
 - The closing invitation displays one reserved seat. No RSVP endpoint or deadline was provided, so the page does not collect or pretend to submit responses.
 - Directions use a venue search until an exact map pin is supplied.
 
-The countdown and calendar invitation use 3 PM Philippine time on December 18, 2026. Motion respects the operating system’s reduced-motion preference. Photographs and attire references are locally stored, optimized copies of the supplied assets.
+The countdown uses 3 PM Philippine time on December 18, 2026. Motion respects the operating system’s reduced-motion preference. Photographs and attire references are locally stored, optimized copies of the supplied assets.
 
 Social link previews use `public/og-wedding.jpg` at 1200 × 630, with the production URL `https://gerald-and-girlie.vercel.app/`. Photographs use WebP with 640px mobile alternatives, lazy loading below the first scene, and explicit dimensions. Vercel serves static assets with cache headers. Generated assets are checked in, so production builds require no media processing.
 

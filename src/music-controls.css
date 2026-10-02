@@ -5,4 +5,4 @@
 #music-volume:disabled{cursor:default;opacity:.5}
 #music-volume:focus-visible{outline:2px solid var(--rust);outline-offset:3px;border-radius:8px}
 #volume-value{min-width:26px;font-size:9px;letter-spacing:0;font-variant-numeric:tabular-nums;text-align:right}
-@media(max-width:760px){.sound-control{padding:7px 12px;gap:10px}.volume-control{padding-left:10px;gap:6px}#music-volume{width:60px}.music-toggle{gap:8px}}
+@media(max-width:760px){.sound-control{padding:7px 12px;gap:10px;font-size:10px}.volume-control{padding-left:10px;gap:6px}#music-volume{width:60px}.music-toggle{gap:8px}#volume-value{font-size:10px}}

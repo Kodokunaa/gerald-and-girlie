@@ -10,3 +10,4 @@
 
 /* Keep the opening statement in three deliberate lines on phones. */
 @media(max-width:760px){.beginning h2{font-size:clamp(38px,12vw,68px);line-height:1.08;letter-spacing:-1px}.beginning h2>span{display:block;white-space:nowrap}.beginning h2>br{display:none}}
+@media(max-width:760px){.beginning-copy .eyebrow{font-size:10px;letter-spacing:2px;line-height:1.5}.beginning-date{font-size:10px;letter-spacing:.7px;line-height:1.5}.beginning-date span{margin:0 6px}}

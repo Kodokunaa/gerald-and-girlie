@@ -11,6 +11,9 @@
 /* Keep the opening statement in three deliberate lines on phones. */
 @media(max-width:760px){.beginning h2{font-size:clamp(38px,12vw,68px);line-height:1.08;letter-spacing:-1px}.beginning h2>span{display:block;white-space:nowrap}.beginning h2>br{display:none}}
 /* Size headings to the available phone width and keep supporting copy legible. */
+.entourage-full{grid-column:1/-1;margin-bottom:45px}
+.sponsors li{text-wrap:balance}
+.sponsors li+li{margin-top:10px}
 .destination h3{margin-inline:auto;line-height:1.15;white-space:nowrap;font-size:clamp(16px,4.5vw,35px);letter-spacing:-.3px}
 .note summary>.note-label{font-family:var(--serif);font-size:inherit;color:inherit;min-width:0;flex:1}
 @media(max-width:760px){

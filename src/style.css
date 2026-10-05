@@ -48,3 +48,5 @@
   .final-signature strong{font-size:clamp(30px,8vw,36px)}
   .scroll-cue{font-size:10px;letter-spacing:1px;bottom:115px}
 }
+
+.leaf-icon{display:block;width:1em;height:1em;flex-shrink:0}

@@ -1,9 +1,9 @@
-/* Leather-bound journal with a turning cover and two turning pages. */
+/* Square, front-facing journal with solid, two-sided turning sheets. */
 .invitation-cover{overflow:clip;padding:24px;perspective:1400px}
 .cover-title{font-size:clamp(38px,5vw,68px)}
 .cover-eyebrow{margin-bottom:16px}
 .journal-stage{position:relative;margin:38px 0 0;perspective:1400px;z-index:2;width:clamp(190px,29svh,290px);aspect-ratio:3/4;transition:transform 1.6s cubic-bezier(.65,0,.2,1),opacity 1.4s ease}
-.journal{position:absolute;inset:0;transform:rotateY(-16deg) rotateZ(-5deg);transform-style:preserve-3d;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.journal{position:absolute;inset:0;transform:rotateY(0deg);transform-style:preserve-3d;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
 .journal:before{content:'';position:absolute;inset:-3px -6px -9px -8px;background:#57362c;border-radius:5px 13px 13px 5px;transform:translateZ(-24px);box-shadow:12px 24px 35px #57362c40}
 .journal-pages{position:absolute;inset:4px -3px -4px 5px;border-radius:3px 8px 8px 3px;background:repeating-linear-gradient(0deg,#d6c6ab 0 1px,#f0e6d1 1px 3px);transform:translateZ(-10px);box-shadow:8px 6px 0 #bba88a}
 .journal-page,.journal-leaf,.journal-front{position:absolute;inset:0;border-radius:3px 9px 9px 3px;transform-origin:left center;backface-visibility:hidden}
@@ -24,10 +24,10 @@
 .journal-subtitle{font-family:var(--serif);font-size:22px;font-style:italic;line-height:1.25}
 .journal-year{margin-top:28px;font-size:8px;letter-spacing:2px}
 .open-journal{position:absolute;inset:0;z-index:10;border:0;background:transparent;border-radius:5px;transform:translateZ(6px)}
-.journal:not(.is-open):hover{transform:rotateY(-8deg) rotateZ(-2deg) translateY(-6px)}
+.journal:not(.is-open):hover{transform:translateY(-6px)}
 .journal:has(.open-journal:focus-visible){outline:2px solid var(--rust);outline-offset:12px}
 .journal.is-open{transform:rotateY(0deg) rotateZ(0deg)}
-.journal.is-open .journal-front{transform:translateZ(4px) rotateY(-165deg)}
+.journal.is-open .journal-front{transform:translateZ(22px) rotateY(-180deg)}
 .journal.is-open .leaf-first{transform:translateZ(2px) rotateY(-170deg)}
 .journal.is-open .leaf-second{transform:translateZ(1px) rotateY(-175deg)}
 .journal-prompt{margin-top:28px;font-size:10px;letter-spacing:1.4px;z-index:1;text-align:center}
@@ -36,10 +36,30 @@
 .cover-title,.cover-eyebrow,.journal-prompt,.cover-date{transition:transform 1.2s ease,opacity 1.2s ease}
 .opening-journal .cover-title,.opening-journal .cover-eyebrow{transform:translateY(-14px)}
 .opening-journal .journal-prompt,.opening-journal .cover-date{transform:translateY(12px)}
+.opening-journal:not(.approaching):not(.departing) .journal-stage{transform:translateX(25%)}
 .approaching .journal-stage{transform:scale(1.45)}
 .invitation-cover.departing{transform:none;opacity:0;transition:opacity 1.6s cubic-bezier(.65,0,.2,1)}
 .departing .journal-stage{transform:scale(6);opacity:0}
 .departing .cover-title,.departing .cover-eyebrow,.departing .journal-prompt,.departing .cover-date{opacity:0}
 @media(max-width:760px){.cover-title{font-size:clamp(34px,10vw,48px)}.cover-eyebrow{font-size:8px;letter-spacing:1.6px}.journal-stage{width:clamp(170px,28svh,240px);margin-top:28px}.journal-prompt{font-size:9px;letter-spacing:1px}.cover-date{font-size:8px;letter-spacing:1.4px}.journal-monogram{font-size:42px;margin:20px 0 14px}}
 @media(max-height:600px) and (min-width:560px){.invitation-cover{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr auto;gap:12px 24px;justify-items:center}.cover-eyebrow{grid-column:1;grid-row:1;margin:0;text-align:center}.cover-title{grid-column:1;grid-row:2;font-size:clamp(30px,4vw,48px)}.journal-stage{grid-column:2;grid-row:1/3;width:min(34vw,50svh);margin:0}.journal-prompt{grid-column:2;grid-row:3;margin:0}.cover-date{grid-column:1;grid-row:3;margin:0}}
-@media(prefers-reduced-motion:reduce){.journal,.journal-stage,.journal-front,.journal-leaf{transition:none!important}.departing .journal-stage{transform:none}.journal.is-open .journal-front,.journal.is-open .journal-leaf{visibility:hidden}.invitation-cover.departing{transition:none!important}}
+.journal:before,.journal-pages,.journal-page,.journal-leaf,.journal-front,.open-journal{border-radius:0}
+.journal-front{transform:translateZ(22px);background:none;border:0;box-shadow:none;display:block;transform-style:preserve-3d;backface-visibility:visible}
+.journal-front:before{display:none}
+.journal-cover-face,.journal-cover-back,.journal-sheet-face{position:absolute;inset:0;backface-visibility:hidden}
+.journal-cover-face{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(90deg,#45291f,#70472f 8%,#875a3d 50%,#67412b);border:1px solid #43291e;box-shadow:inset 7px 0 6px #24150e44,inset -2px 0 3px #d3a37844;transform:translateZ(.5px)}
+.journal-cover-face:before{content:'';position:absolute;inset:14px 12px 14px 20px;border:1px solid #caa37377}
+.journal-cover-back{transform:rotateY(180deg) translateZ(.5px);background:linear-gradient(90deg,#e0d1b6,#f0e4cf);border:8px solid #67412b;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:var(--serif);font-size:22px}
+.journal-cover-back:after{content:'';position:absolute;inset:12px;border:1px solid #b79f8666}
+.open-journal{transform:translateZ(24px)}
+.journal-leaf{transform:translateZ(var(--depth));background:none;border:0;box-shadow:none;transform-style:preserve-3d;backface-visibility:visible;transition:none}
+.journal-leaf:after{display:none}
+.journal-sheet-face{background:linear-gradient(90deg,#ddceb6,#faf4e7 12%,#efe2cb);border:1px solid #dbc9aa;box-shadow:2px 1px 5px #57362c19;transform:translateZ(.2px)}
+.journal-sheet-face:after{content:'';position:absolute;inset:16% 12%;background:repeating-linear-gradient(transparent 0 22px,#b79f8638 22px 23px)}
+.journal-sheet-face span{position:absolute;bottom:12px;right:16px;font:italic 12px var(--serif);color:var(--muted)}
+.sheet-back{transform:rotateY(180deg) translateZ(.2px);background:linear-gradient(270deg,#ddceb6,#faf4e7 12%,#efe2cb)}
+.sheet-back span{right:auto;left:16px}
+@media(max-width:760px){.opening-journal:not(.approaching):not(.departing) .journal-stage{transform:translateX(35%) scale(.72)}}
+.journal.is-open .journal-leaf{animation:journal-page-turn 1.45s cubic-bezier(.35,.05,.3,1) calc(.6s + var(--page) * .22s) both}
+@keyframes journal-page-turn{from{transform:translateZ(var(--depth)) rotateY(0deg)}to{transform:translateZ(calc(2px + var(--page) * .35px)) rotateY(-180deg)}}
+@media(prefers-reduced-motion:reduce){.journal,.journal-stage,.journal-front,.journal-leaf{transition:none!important}.departing .journal-stage{transform:none}.journal.is-open .journal-leaf{animation:none!important;transform:translateZ(var(--depth)) rotateY(-180deg)}.invitation-cover.departing{transition:none!important}}

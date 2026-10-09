@@ -3,6 +3,23 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const main = document.querySelector('main');
 const cover = document.querySelector('.invitation-cover');
 const journal = document.querySelector('.journal');
+// Every sheet has separate front and back faces so it stays solid as it turns.
+for (let page = 15; page >= 0; page--) {
+  const sheet = document.createElement('div');
+  sheet.className = 'journal-leaf';
+  sheet.setAttribute('aria-hidden', 'true');
+  sheet.style.setProperty('--page', page);
+  sheet.style.setProperty('--depth', `${18 - page}px`);
+  for (const side of ['front', 'back']) {
+    const face = document.createElement('div');
+    face.className = `journal-sheet-face sheet-${side}`;
+    const number = document.createElement('span');
+    number.textContent = String(page * 2 + (side === 'front' ? 1 : 2)).padStart(2, '0');
+    face.append(number);
+    sheet.append(face);
+  }
+  journal.insertBefore(sheet, journal.querySelector('.journal-front'));
+}
 let opened = false;
 let toastTimer;
 
@@ -30,7 +47,7 @@ document.querySelector('.open-journal').addEventListener('click', event => {
   journal.classList.add('is-open');
   cover.classList.add('opening-journal');
   document.querySelector('.journal-prompt').textContent = 'Your next chapter is unfolding…';
-  const openingDelay = reducedMotion.matches ? 1000 : 3200;
+  const openingDelay = reducedMotion.matches ? 1000 : 4600;
   if (!reducedMotion.matches) setTimeout(() => cover.classList.add('approaching'), 2200);
   music.startAfter(openingDelay);
   setTimeout(() => {

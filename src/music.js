@@ -58,7 +58,7 @@ export function setupMusic({ audio, toggle, volume, label, output, notify, sched
   audio.addEventListener('volumechange', update);
   update();
   function startAfter(delay) {
-    // Unlock playback inside the envelope click, silently. Reveal the sound
+    // Unlock playback inside the journal click, silently. Reveal the sound
     // at the same time as the page transition, starting from the beginning.
     audio.volume = 0;
     void play();

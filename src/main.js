@@ -2,7 +2,7 @@ import { setupMusic } from './music.js';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const main = document.querySelector('main');
 const cover = document.querySelector('.invitation-cover');
-const envelope = document.querySelector('.envelope');
+const journal = document.querySelector('.journal');
 let opened = false;
 let toastTimer;
 
@@ -23,14 +23,15 @@ const music = setupMusic({
   notify: toast,
 });
 
-document.querySelector('.open-envelope').addEventListener('click', event => {
+document.querySelector('.open-journal').addEventListener('click', event => {
   if (opened) return;
   opened = true;
   event.currentTarget.disabled = true;
-  envelope.classList.add('is-open');
-  cover.classList.add('unsealing');
-  document.querySelector('.envelope-prompt').textContent = 'Your next adventure is unfolding…';
-  const openingDelay = reducedMotion.matches ? 1000 : 2000;
+  journal.classList.add('is-open');
+  cover.classList.add('opening-journal');
+  document.querySelector('.journal-prompt').textContent = 'Your next chapter is unfolding…';
+  const openingDelay = reducedMotion.matches ? 1000 : 3200;
+  if (!reducedMotion.matches) setTimeout(() => cover.classList.add('approaching'), 2200);
   music.startAfter(openingDelay);
   setTimeout(() => {
     document.body.classList.add('entered');
@@ -39,7 +40,7 @@ document.querySelector('.open-envelope').addEventListener('click', event => {
     cover.inert = true;
     main.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
-    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1400);
+    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1600);
   }, openingDelay);
 });
 const observer = new IntersectionObserver(entries => {

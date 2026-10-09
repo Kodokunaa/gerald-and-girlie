@@ -47,7 +47,12 @@ document.querySelector('.open-journal').addEventListener('click', event => {
   journal.classList.add('is-open');
   cover.classList.add('opening-journal');
   document.querySelector('.journal-prompt').textContent = 'Your next chapter is unfolding…';
-  const openingDelay = reducedMotion.matches ? 1000 : 4600;
+  // Wait for the longest sheet animation, then hold the open journal for 1s.
+  const pageFinish = Math.max(...[...journal.querySelectorAll('.journal-leaf')].map(sheet => {
+    const timing = getComputedStyle(sheet);
+    return (parseFloat(timing.animationDelay) + parseFloat(timing.animationDuration)) * 1000;
+  }));
+  const openingDelay = reducedMotion.matches ? 1000 : pageFinish + 1000;
   if (!reducedMotion.matches) setTimeout(() => cover.classList.add('approaching'), 2200);
   music.startAfter(openingDelay);
   setTimeout(() => {

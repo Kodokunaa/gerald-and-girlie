@@ -2,24 +2,7 @@ import { setupMusic } from './music.js';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const main = document.querySelector('main');
 const cover = document.querySelector('.invitation-cover');
-const journal = document.querySelector('.journal');
-// Every sheet has separate front and back faces so it stays solid as it turns.
-for (let page = 15; page >= 0; page--) {
-  const sheet = document.createElement('div');
-  sheet.className = 'journal-leaf';
-  sheet.setAttribute('aria-hidden', 'true');
-  sheet.style.setProperty('--page', page);
-  sheet.style.setProperty('--depth', `${18 - page}px`);
-  for (const side of ['front', 'back']) {
-    const face = document.createElement('div');
-    face.className = `journal-sheet-face sheet-${side}`;
-    const number = document.createElement('span');
-    number.textContent = String(page * 2 + (side === 'front' ? 1 : 2)).padStart(2, '0');
-    face.append(number);
-    sheet.append(face);
-  }
-  journal.insertBefore(sheet, journal.querySelector('.journal-front'));
-}
+const envelope = document.querySelector('.envelope');
 let opened = false;
 let toastTimer;
 
@@ -40,20 +23,14 @@ const music = setupMusic({
   notify: toast,
 });
 
-document.querySelector('.open-journal').addEventListener('click', event => {
+document.querySelector('.open-envelope').addEventListener('click', event => {
   if (opened) return;
   opened = true;
   event.currentTarget.disabled = true;
-  journal.classList.add('is-open');
-  cover.classList.add('opening-journal');
-  document.querySelector('.journal-prompt').textContent = 'Your next chapter is unfolding…';
-  // Wait for the longest sheet animation, then hold the open journal for 1s.
-  const pageFinish = Math.max(...[...journal.querySelectorAll('.journal-leaf')].map(sheet => {
-    const timing = getComputedStyle(sheet);
-    return (parseFloat(timing.animationDelay) + parseFloat(timing.animationDuration)) * 1000;
-  }));
-  const openingDelay = reducedMotion.matches ? 1000 : pageFinish + 1000;
-  if (!reducedMotion.matches) setTimeout(() => cover.classList.add('approaching'), 2200);
+  envelope.classList.add('is-open');
+  cover.classList.add('unsealing');
+  document.querySelector('.envelope-prompt').textContent = 'Your next adventure is unfolding…';
+  const openingDelay = reducedMotion.matches ? 1000 : 2000;
   music.startAfter(openingDelay);
   setTimeout(() => {
     document.body.classList.add('entered');
@@ -62,7 +39,7 @@ document.querySelector('.open-journal').addEventListener('click', event => {
     cover.inert = true;
     main.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
-    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1600);
+    setTimeout(() => { cover.hidden = true; }, reducedMotion.matches ? 0 : 1400);
   }, openingDelay);
 });
 const observer = new IntersectionObserver(entries => {

@@ -9,7 +9,7 @@ Run `npm install`, then `npm run dev`. Production: `npm run build`.
 - The supplied **“Been So Good” piano cover by James Wong** is included in `public/audio/been-so-good-keyboard-v2.mp3`. It starts with the main-page transition two seconds after the envelope is clicked (one second with reduced motion), loops at 100% volume, and can be paused or resumed with the music pill. The slider controls volume; failed downloads can be retried.
 - Three additional groomsmen are pending. Add their names to the groomsmen list in `index.html` when supplied.
 - Attire references are labeled for the entourage; the guest dress code has not been confirmed.
-- The closing invitation displays one reserved seat. No RSVP endpoint or deadline was provided, so the page does not collect or pretend to submit responses.
+- The closing invitation displays one reserved seat and an RSVP form (name, attendance, optional message). Follow `integrations/RSVP-SETUP.md` to connect its Vercel endpoint to Google Sheets. Submission stays disabled until the connection is configured. No RSVP deadline was provided.
 - Directions use a venue search until an exact map pin is supplied.
 
 The countdown uses 3 PM Philippine time on December 18, 2026. Motion respects the operating system’s reduced-motion preference. Photographs and attire references are locally stored, optimized copies of the supplied assets.

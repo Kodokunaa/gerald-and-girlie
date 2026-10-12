@@ -60,6 +60,31 @@
 
 .leaf-icon{display:block;width:1em;height:1em;flex-shrink:0}
 
+.rsvp-paper{position:relative;z-index:2;width:min(100%,620px);margin:65px auto 75px;padding:45px 42px;background:#faf6ed;border:1px solid #d2bfa4;box-shadow:0 20px 55px #57362c20;text-align:left}
+.rsvp-paper>.eyebrow{text-align:center;color:var(--rust);margin-bottom:18px}
+.rsvp-paper h2{font-size:clamp(36px,5vw,56px);line-height:1.1;text-align:center;letter-spacing:-1px}
+.rsvp-paper h2 em{color:var(--rust)}
+.rsvp-intro{font:20px/1.5 var(--serif);text-align:center;margin:18px 0 30px}
+.rsvp-field{display:block;font:18px/1.5 var(--serif);margin-top:22px}
+.rsvp-optional{color:var(--muted);font-size:15px}
+.rsvp-field input,.rsvp-field textarea{display:block;width:100%;margin-top:8px;padding:13px 14px;border:1px solid #b79f8688;border-radius:2px;background:#fffdf7;color:var(--ink);font:16px/1.5 Arial,sans-serif;transition:border-color .2s,box-shadow .2s}
+.rsvp-field input:focus,.rsvp-field textarea:focus{outline:2px solid var(--rust);outline-offset:2px}
+.rsvp-field textarea{resize:vertical;min-height:100px}
+#rsvp-form fieldset{padding:0;margin:24px 0 0;border:0;min-width:0}
+#rsvp-form legend{font:18px/1.5 var(--serif);margin-bottom:12px}
+.rsvp-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rsvp-choices label{display:flex;align-items:center;gap:10px;padding:15px 12px;border:1px solid #b79f8688;cursor:pointer;transition:background .2s,border-color .2s,transform .2s;font:17px var(--serif)}
+.rsvp-choices label:has(input:checked){background:#e8dbc5;border-color:var(--rust)}
+.rsvp-choices label:active{transform:scale(.98)}
+.rsvp-choices input{accent-color:var(--rust);width:17px;height:17px;flex-shrink:0}
+.rsvp-trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#rsvp-form button{display:block;width:100%;margin-top:24px;padding:17px;border:1px solid var(--ink);background:var(--ink);color:#faf6ed;font-size:14px;letter-spacing:.6px;transition:background .2s,transform .2s}
+#rsvp-form button:hover:not(:disabled){background:var(--rust)}
+#rsvp-form button:active:not(:disabled){transform:scale(.98)}
+#rsvp-form button:disabled{opacity:.55;cursor:default}
+#rsvp-status{margin-top:16px;font:16px/1.5 var(--serif);min-height:24px;text-align:center}
+@media(max-width:760px){.rsvp-paper{padding:32px 20px;margin-top:50px;margin-bottom:70px}.rsvp-paper h2{font-size:36px}.rsvp-paper>.eyebrow{font-size:9px;letter-spacing:1px}.rsvp-intro{font-size:18px}.rsvp-choices{grid-template-columns:1fr}}
+
 .entourage-section-title{padding-top:20px;border-top:1px solid #b79f8655;margin-bottom:30px}
 .entourage-section-title h3{margin-bottom:0}
 .ceremony-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:45px;padding:35px 0;border-block:1px solid #b79f8655}

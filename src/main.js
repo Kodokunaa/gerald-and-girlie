@@ -1,4 +1,6 @@
 import { setupMusic } from './music.js';
+import { setupRsvp } from './rsvp.js';
+setupRsvp();
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const main = document.querySelector('main');
 const cover = document.querySelector('.invitation-cover');

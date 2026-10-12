@@ -59,3 +59,17 @@
 }
 
 .leaf-icon{display:block;width:1em;height:1em;flex-shrink:0}
+
+.entourage-section-title{padding-top:20px;border-top:1px solid #b79f8655;margin-bottom:30px}
+.entourage-section-title h3{margin-bottom:0}
+.ceremony-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:45px;padding:35px 0;border-block:1px solid #b79f8655}
+.ceremony-roles p{font-family:var(--serif);font-size:23px;line-height:1.6;text-wrap:balance}
+.entourage .ceremony-roles h3{font-size:28px;line-height:1.2;text-wrap:balance}
+.children-entourage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 30px;margin-bottom:0}
+.children-entourage h3{line-height:1.2;text-wrap:balance}
+.children-entourage li{text-wrap:balance}
+@media(max-width:760px){
+  .ceremony-roles,.children-entourage{grid-template-columns:1fr;gap:30px}
+  .ceremony-roles p{font-size:21px}
+  .entourage .ceremony-roles h3,.entourage .children-entourage h3{font-size:clamp(25px,7vw,30px)}
+}
